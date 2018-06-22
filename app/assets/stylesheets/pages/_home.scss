@@ -1,1 +1,28 @@
 // Specific CSS for your home-page
+#liste{
+  display: grid;
+}
+
+.one {
+  grid-column: 1;
+  grid-row: 1;
+  width: 25%;
+}
+
+.two {
+  grid-column: 2;
+  grid-row: 1;
+  width: 25%;
+}
+
+.three {
+  grid-column: 3;
+  grid-row: 1;
+  width: 25%;
+}
+
+.four {
+  grid-column: 4;
+  grid-row: 1;
+  width: 25%;
+}
