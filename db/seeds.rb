@@ -16,36 +16,39 @@
 
 
 puts "delete table Categories"
-Categories.destroy_all
+Category.destroy_all
 
 puts "delete table Tasks"
-Tasks.destroy_all
-
+Task.destroy_all
 
 
 puts "Create some Categories (urgent, pas urgent)"
-urgent = Categories.create!(
+urgent = Category.create!(
   name: "Urgent"
 )
-important = Categories.create!(
+important = Category.create!(
   name: "Important"
 )
-attente = Categories.create!(
+attente = Category.create!(
   name: "En attente"
 )
 
 puts "Create some Tasks (email / password)"
-Tasks.create!(
+Task.create!(
   name: "My first task",
   ending_date: Date.today,
   done: false,
   category: urgent
 )
-Tasks.create!(
-  name: "My first task",
+Task.create!(
+  name: "My second task",
   ending_date: Date.today,
   done: false,
   category: important
 )
 
+User.create!(
+  email: 'alex@test.com',
+  password: 'aaaaaa'
+)
 
