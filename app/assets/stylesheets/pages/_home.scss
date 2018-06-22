@@ -3,26 +3,34 @@
   display: grid;
 }
 
-.one {
+#one {
   grid-column: 1;
-  grid-row: 1;
-  width: 25%;
 }
 
-.two {
+#two {
   grid-column: 2;
-  grid-row: 1;
-  width: 25%;
 }
 
-.three {
+#three {
   grid-column: 3;
-  grid-row: 1;
-  width: 25%;
 }
 
-.four {
+#four {
   grid-column: 4;
+}
+
+.tasks {
+  border-radius: 10px;
+  border: 5px solid black;
   grid-row: 1;
   width: 25%;
+  padding: 50px;
+  width: 300px;
+}
+
+.task {
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  width: 220px;
 }

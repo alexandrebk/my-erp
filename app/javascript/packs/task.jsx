@@ -40,6 +40,26 @@ class App extends Component {
     }
   }
 
+  async fetchTask() {
+    const myrequest = await fetch('http://localhost:3000/api/v1/tasks', {
+      method: 'get'
+    });
+    let text = await myrequest.json();
+    console.log(text);
+    console.log(text[0].name);
+    return text
+  };
+
+  async componentDidMount() {
+    // await pour attendre la vraie réponse et ne pas avoir une promesse
+    let tasks = await this.fetchTask();
+    console.log("Promesse");
+    console.log(this.fetchTask());
+    this.setState({
+      myList: tasks
+    });
+  }
+
   setStartingData(title, date, done, category) {
     this.setState({
       startingData: {title, date, done, category}
@@ -135,16 +155,16 @@ class App extends Component {
         <br/>
         <br/>
         <div id="liste">
-          <div className="one" onDrop={(event) => this.onDrop(event, "one")} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="one" className="tasks" onDrop={(event) => this.onDrop(event, "one")} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat("one")}
           </div>
-          <div className="two" onDrop={(event) => this.onDrop(event, "two")} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="two" className="tasks" onDrop={(event) => this.onDrop(event, "two")} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat("two")}
           </div>
-          <div className="three" onDrop={(event) => this.onDrop(event, "three")} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="three" className="tasks" onDrop={(event) => this.onDrop(event, "three")} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat("three")}
           </div>
-          <div className="four" onDrop={(event) => this.onDrop(event, "four")} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="four" className="tasks" onDrop={(event) => this.onDrop(event, "four")} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat("four")}
           </div>
         </div>
@@ -162,7 +182,7 @@ class Task extends Component {
   render(){
     let monStyle = {width: "130px", display: "inline-block"}
     return (
-      <div className="task" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.title)}>
+      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.title)}>
         {this.props.task.done ?
           (
             <span>
