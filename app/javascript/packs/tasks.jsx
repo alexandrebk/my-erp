@@ -70,7 +70,17 @@ class App extends Component {
     });
   }
 
-  removeElementFromList(elementToRemove){
+  async removeElementFromList(elementToRemove){
+    console.log(elementToRemove.id);
+    const myrequest = await fetch(`http://localhost:3000/api/v1/tasks/${elementToRemove.id}`, {
+      method: 'DELETE',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+    });
     this.setState({myList: this.state.myList.filter((element) => element !== elementToRemove)});
   }
 
