@@ -9,10 +9,11 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     # message = @channel.messages.build(content: params[:content])
-    puts "CREATE A TASK"
-    task = Task.new(params[:content])
+    puts params[:name]
+    task = Task.new(name: params[:name], ending_date: params[:ending_date], done: params[:done], category_id: params[:category_id], created_at: Date.today, updated_at: Date.today)
+    p task
+    puts "JE SAVE LA TASK"
     task.save
     render json: task # see Message.as_json method
-    # redirect_to(root_path)
   end
 end
