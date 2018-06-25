@@ -1,9 +1,8 @@
 import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom';
-// import '../../assets/stylesheets/application.scss';
 
-let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 3};
+let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
 class App extends Component {
   constructor(){ // initialize en Ruby, est déclenché quand on fait une création d'objet cad un new
@@ -11,11 +10,10 @@ class App extends Component {
     this.state = { // this correspond à self en Ruby, state correspond au modèle, c'est une énumération de clé valeur
       startingData,
       myList  : [ ]
-      // editing: YES
     }
   }
 
-  async fetchTask() {
+  async readTask() {
     const myrequest = await fetch('http://localhost:3000/api/v1/tasks', {
       method: 'GET',
       headers: {
@@ -30,10 +28,10 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    // await pour attendre la vraie réponse et ne pas avoir une promesse
-    let tasks = await this.fetchTask();
-    console.log("Retourne une promesse");
-    console.log(this.fetchTask());
+    // On utilise await pour attendre la vraie réponse et ne pas avoir une promesse
+    let tasks = await this.readTask();
+    // Retourne seulement une promesse car on ne met pas de await
+    console.log(this.readTask());
     this.setState({
       myList: tasks
     });
@@ -70,8 +68,7 @@ class App extends Component {
     });
   }
 
-  async removeElementFromList(elementToRemove){
-    console.log(elementToRemove.id);
+  async deleteElementFromList(elementToRemove){
     const myrequest = await fetch(`http://localhost:3000/api/v1/tasks/${elementToRemove.id}`, {
       method: 'DELETE',
       headers: {
@@ -84,12 +81,25 @@ class App extends Component {
     this.setState({myList: this.state.myList.filter((element) => element !== elementToRemove)});
   }
 
-  editingElementFromList(elementToEdit, newElement){
+  async editingElementFromList(elementToEdit, newElement){
+    console.log("On modifie l'element")
+    Object.assign(elementToEdit,newElement);
+    console.log(elementToEdit);
+    console.log("je fetch l'API avec une requete PATCH");
+    const myrequest = await fetch(`http://localhost:3000/api/v1/tasks/${elementToEdit.id}`, {
+      method: 'PATCH',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(elementToEdit)
+    });
     this.setState({
       myList : this.state.myList.map(
         function (element) {
-          console.log(elementToEdit);
-          console.log(newElement);
+          // Quand la tache est égale à la tâche modifié alors on la modifie
           console.log(element === elementToEdit);
           if (element === elementToEdit) {return Object.assign(elementToEdit,newElement)}
           else {return element}
@@ -98,18 +108,18 @@ class App extends Component {
     });
   }
 
-  onDrop(event, category){
-    console.log("==> debug");
-    console.log(event.dataTransfer);
+  async onDrop(event, category){
+    // L'id est dans l'event
     console.log(event.dataTransfer.getData("text/plain"));
-    // quand c'est false true, quand c'est true false ==> toggle
-    //
     this.setState({
       myList : this.state.myList.map(
         function (element) {
-          console.log(element.name);
-          if (element.name === event.dataTransfer.getData("text/plain")) {return Object.assign(element,{category_id: category})}
-          else {return element}
+          if (element.id == event.dataTransfer.getData("text/plain")) {
+            Object.assign(element,{category_id: category});
+            return element
+          } else {
+            return element
+          }
         }
       )
     });
@@ -121,21 +131,19 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.myList);
-    let afficherCat = (done) =>
+    let afficherCat = (category) =>
           this.state.myList
-              .filter((element) => element.category_id === done)
+              .filter((element) => element.category_id === category)
               .map(
                 (element, i) => <Task
                   key        = {i}
                   task       = {element}
-                  removing   = {() => this.removeElementFromList(element)}
+                  removing   = {() => this.deleteElementFromList(element)}
                   editing    = {(newElement) => this.editingElementFromList(element, newElement)}
                 />
               )
     return (
       <div>
-        <div> To Do List </div>
         <br/>
         <input
           onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
@@ -185,7 +193,7 @@ class Task extends Component {
   render(){
     let monStyle = {width: "130px", display: "inline-block"}
     return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.title)}>
+      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
         {this.props.task.done ?
           (
             <span>
@@ -196,7 +204,7 @@ class Task extends Component {
           ) : (
             <span>
               <input
-                onChange = {(event) => this.props.editing({title: event.target.value})}
+                onChange = {(event) => this.props.editing({name: event.target.value})}
                 value = {this.props.task.name}
               />
               &nbsp;

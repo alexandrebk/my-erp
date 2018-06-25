@@ -20,6 +20,12 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update        # PATCH /tasks/:id
+    puts "JE PASSE DANS UN UPDATE"
+    puts params[:name]
+    task = Task.find(params[:id])
+    task.update(name: params[:name], ending_date: params[:ending_date], done: params[:done], category_id: params[:category_id], updated_at: Date.today)
+    p task
+    render json: task
   end
 
   def destroy
