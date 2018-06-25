@@ -8,9 +8,11 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
-    task = Task.all
-    task.user = current_user
+    # message = @channel.messages.build(content: params[:content])
+    puts "CREATE A TASK"
+    task = Task.new(params[:content])
     task.save
-    render json: message # see Message.as_json method
+    render json: task # see Message.as_json method
+    # redirect_to(root_path)
   end
 end
