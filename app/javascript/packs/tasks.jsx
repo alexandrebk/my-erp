@@ -2,6 +2,8 @@ import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+const api_path = "<%= asset_path(my_image.png) %>"
+
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
 class App extends Component {
@@ -11,6 +13,10 @@ class App extends Component {
       startingData,
       myList  : [ ]
     }
+  }
+
+  fetchAPI(data, verb){
+    // mettre la requete AJAX
   }
 
   async readTask() {
@@ -110,15 +116,26 @@ class App extends Component {
 
   async onDrop(event, category){
     // L'id est dans l'event
+    console.log("==> debug");
     console.log(event.dataTransfer.getData("text/plain"));
     this.setState({
       myList : this.state.myList.map(
         function (element) {
           if (element.id == event.dataTransfer.getData("text/plain")) {
             Object.assign(element,{category_id: category});
-            return element
+            const myrequest = fetch(`http://localhost:3000/api/v1/tasks/${element.id}`, {
+              method: 'PATCH',
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+              },
+              credentials: 'same-origin',
+              body: JSON.stringify(element)
+            });
+            return element;
           } else {
-            return element
+            return element;
           }
         }
       )
