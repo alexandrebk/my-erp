@@ -2,8 +2,6 @@ import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-const api_path = "<%= asset_path(my_image.png) %>"
-
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
 class App extends Component {
@@ -20,7 +18,7 @@ class App extends Component {
   }
 
   async readTask() {
-    const myrequest = await fetch('http://localhost:3000/api/v1/tasks', {
+    const myrequest = await fetch(document.URL + 'api/v1/tasks', {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -52,7 +50,7 @@ class App extends Component {
   async fillList(){
     console.log(this.state.startingData);
     console.log("je fetch l'API avec une requete POST");
-    const myrequest = await fetch('http://localhost:3000/api/v1/tasks', {
+    const myrequest = await fetch(document.URL + 'api/v1/tasks', {
       method: 'POST',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -75,7 +73,7 @@ class App extends Component {
   }
 
   async deleteElementFromList(elementToRemove){
-    const myrequest = await fetch(`http://localhost:3000/api/v1/tasks/${elementToRemove.id}`, {
+    const myrequest = await fetch(document.URL + `api/v1/tasks/${elementToRemove.id}`, {
       method: 'DELETE',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -92,7 +90,7 @@ class App extends Component {
     Object.assign(elementToEdit,newElement);
     console.log(elementToEdit);
     console.log("je fetch l'API avec une requete PATCH");
-    const myrequest = await fetch(`http://localhost:3000/api/v1/tasks/${elementToEdit.id}`, {
+    const myrequest = await fetch(document.URL + `api/v1/tasks/${elementToEdit.id}`, {
       method: 'PATCH',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -123,7 +121,7 @@ class App extends Component {
         function (element) {
           if (element.id == event.dataTransfer.getData("text/plain")) {
             Object.assign(element,{category_id: category});
-            const myrequest = fetch(`http://localhost:3000/api/v1/tasks/${element.id}`, {
+            const myrequest = fetch(document.URL + `api/v1/tasks/${element.id}`, {
               method: 'PATCH',
               headers: {
                 'X-Requested-With': 'XMLHttpRequest',
