@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Task from './task';
+// import Task from './task';
 
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
@@ -38,10 +38,25 @@ class App extends Component {
     });
   }
 
-  setStartingData(name, ending_date, done, category_id) {
+  async setStartingData(name, ending_date, done, category_id) {
     this.setState({
       startingData: {name, ending_date, done, category_id}
+    }, ()=>{
+      console.log(this.state.startingData)
     });
+    // A refacto comme ci-dessous
+    // this.setState({
+    //   [option] : value
+    // }, ()=>{
+    //     console.log(this.state.startingData)
+    // });
+  }
+
+
+  handleCategoryChange = (value, option) => {
+    const newElement = { [option] : parseInt(value, 10) }
+    Object.assign(this.state.startingData,newElement);
+    console.log(this.state.startingData);
   }
 
   async fillList(){
@@ -163,32 +178,40 @@ class App extends Component {
         />
         &nbsp;
         <input
-          type  = "date"
+          type     = "date"
           onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
-          value = {this.state.startingData.ending_date}
+          value    = {this.state.startingData.ending_date}
         />
         &nbsp;
         <input
           value = {this.state.startingData.done}
-          type="hidden"
+          type  = "hidden"
         />
+        <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
         <button onClick = {() => this.fillList()} >
           Valider
         </button>
         <br/>
         <br/>
-        <div id="liste">
-          <div id="one" className="tasks" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(1)}
-          </div>
-          <div id="two" className="tasks" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(2)}
-          </div>
-          <div id="three" className="tasks" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(3)}
-          </div>
-          <div id="four" className="tasks" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(4)}
+        <div id="container">
+          <div className="row">
+            <div id="one" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+              {afficherCat(1)}
+            </div>
+            <div id="two" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+              {afficherCat(2)}
+            </div>
+            <div id="three" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+              {afficherCat(3)}
+            </div>
+            <div id="four" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+              {afficherCat(4)}
+            </div>
           </div>
         </div>
       </div>
@@ -196,52 +219,52 @@ class App extends Component {
   }
 }
 
-// class Task extends Component {
-//   constructor(props){
-//     super(props);
-//     this.state = {};
-//   }
+class Task extends Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
 
-//   render(){
-//     let monStyle = {width: "130px", display: "inline-block"}
-//     return (
-//       <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
-//         {this.props.task.done ?
-//           (
-//             <span>
-//               <span style={monStyle} > {this.props.task.name} </span>
-//               &nbsp;
-//               <span style={monStyle} > {this.props.task.ending_date} </span>
-//             </span>
-//           ) : (
-//             <span>
-//               <input
-//                 onChange = {(event) => this.props.editing({name: event.target.value})}
-//                 value = {this.props.task.name}
-//               />
-//               &nbsp;
-//               <input
-//                 type = "date"
-//                 onChange = {(event) => this.props.editing({date: event.target.value})}
-//                 value = {this.props.task.ending_date}
-//               />
-//             </span>
-//           )
-//         }
-//         &nbsp;
-//         <button onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
-//           { this.props.task.done ? "Mark as undone" : "Mark as done" }
-//         </button>
-//         &nbsp;
-//         <button onClick = {this.props.removing} >
-//           Delete
-//         </button>
-//         <br/>
-//         <br/>
-//       </div>
-//     );
-//   }
-// }
+  render(){
+    let monStyle = {width: "130px", display: "inline-block"}
+    return (
+      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
+        {this.props.task.done ?
+          (
+            <span>
+              <span style={monStyle} > {this.props.task.name} </span>
+              &nbsp;
+              <span style={monStyle} > {this.props.task.ending_date} </span>
+            </span>
+          ) : (
+            <span>
+              <input
+                onChange = {(event) => this.props.editing({name: event.target.value})}
+                value = {this.props.task.name}
+              />
+              &nbsp;
+              <input
+                type = "date"
+                onChange = {(event) => this.props.editing({date: event.target.value})}
+                value = {this.props.task.ending_date}
+              />
+            </span>
+          )
+        }
+        &nbsp;
+        <button onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
+          { this.props.task.done ? "Mark as undone" : "Mark as done" }
+        </button>
+        &nbsp;
+        <button onClick = {this.props.removing} >
+          Delete
+        </button>
+        <br/>
+        <br/>
+      </div>
+    );
+  }
+}
 
 // onDrop={(event) => this.onDrop(event, categorie1)}
 // On récupère la catégorie quand fait un onDrop et la rebascule qd on fait le map.
