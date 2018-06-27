@@ -38,7 +38,7 @@ class App extends Component {
     });
   }
 
-  async setStartingData(name, ending_date, done, category_id) {
+  setStartingData(name, ending_date, done, category_id) {
     this.setState({
       startingData: {name, ending_date, done, category_id}
     }, ()=>{
@@ -187,6 +187,7 @@ class App extends Component {
           value = {this.state.startingData.done}
           type  = "hidden"
         />
+        <span>Category: </span>
         <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
           <option value="1">1</option>
           <option value="2">2</option>
