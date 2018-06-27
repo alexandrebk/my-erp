@@ -1,6 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import ReactDOM from 'react-dom';
+import Task from './task';
 
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
@@ -11,10 +12,6 @@ class App extends Component {
       startingData,
       myList  : [ ]
     }
-  }
-
-  fetchAPI(data, verb){
-    // mettre la requete AJAX
   }
 
   async readTask() {
@@ -199,52 +196,52 @@ class App extends Component {
   }
 }
 
-class Task extends Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
+// class Task extends Component {
+//   constructor(props){
+//     super(props);
+//     this.state = {};
+//   }
 
-  render(){
-    let monStyle = {width: "130px", display: "inline-block"}
-    return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
-        {this.props.task.done ?
-          (
-            <span>
-              <span style={monStyle} > {this.props.task.name} </span>
-              &nbsp;
-              <span style={monStyle} > {this.props.task.ending_date} </span>
-            </span>
-          ) : (
-            <span>
-              <input
-                onChange = {(event) => this.props.editing({name: event.target.value})}
-                value = {this.props.task.name}
-              />
-              &nbsp;
-              <input
-                type = "date"
-                onChange = {(event) => this.props.editing({date: event.target.value})}
-                value = {this.props.task.ending_date}
-              />
-            </span>
-          )
-        }
-        &nbsp;
-        <button onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
-          { this.props.task.done ? "Mark as undone" : "Mark as done" }
-        </button>
-        &nbsp;
-        <button onClick = {this.props.removing} >
-          Delete
-        </button>
-        <br/>
-        <br/>
-      </div>
-    );
-  }
-}
+//   render(){
+//     let monStyle = {width: "130px", display: "inline-block"}
+//     return (
+//       <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
+//         {this.props.task.done ?
+//           (
+//             <span>
+//               <span style={monStyle} > {this.props.task.name} </span>
+//               &nbsp;
+//               <span style={monStyle} > {this.props.task.ending_date} </span>
+//             </span>
+//           ) : (
+//             <span>
+//               <input
+//                 onChange = {(event) => this.props.editing({name: event.target.value})}
+//                 value = {this.props.task.name}
+//               />
+//               &nbsp;
+//               <input
+//                 type = "date"
+//                 onChange = {(event) => this.props.editing({date: event.target.value})}
+//                 value = {this.props.task.ending_date}
+//               />
+//             </span>
+//           )
+//         }
+//         &nbsp;
+//         <button onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
+//           { this.props.task.done ? "Mark as undone" : "Mark as done" }
+//         </button>
+//         &nbsp;
+//         <button onClick = {this.props.removing} >
+//           Delete
+//         </button>
+//         <br/>
+//         <br/>
+//       </div>
+//     );
+//   }
+// }
 
 // onDrop={(event) => this.onDrop(event, categorie1)}
 // On récupère la catégorie quand fait un onDrop et la rebascule qd on fait le map.
