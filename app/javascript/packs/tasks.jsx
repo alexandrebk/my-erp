@@ -3,6 +3,9 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom';
 // import Task from './task';
 
+var width = window.innerWidth ;
+var height = window.innerHeight ;
+
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
 
 class App extends Component {
@@ -189,10 +192,10 @@ class App extends Component {
         />
         <span>Category: </span>
         <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+          <option value="1">Urgent & Important</option>
+          <option value="2">Pas Urgent & Important</option>
+          <option value="3">Urgent & Pas Important</option>
+          <option value="4">Pas Urgent & Pas Important</option>
         </select>
         <button onClick = {() => this.fillList()} >
           Valider
@@ -201,16 +204,35 @@ class App extends Component {
         <br/>
         <div id="container">
           <div className="row">
-            <div id="one" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="one" className="col-md-2" >
+            </div>
+            <div id="one" className="col-xs-12 col-md-5" >
+              Urgent
+            </div>
+            <div id="two" className="col-xs-12 col-md-5" >
+              Pas Urgent
+            </div>
+          </div>
+          <div className="row line">
+            <div id="one" className="col-md-2" >
+            Important
+            </div>
+            <div id="one" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(1)}
             </div>
-            <div id="two" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="two" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(2)}
             </div>
-            <div id="three" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+          </div>
+          ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          <div className="row line">
+            <div id="one" className="col-md-2" >
+            Pas important
+            </div>
+            <div id="three" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(3)}
             </div>
-            <div id="four" className="col-xs-12 col-sm-3 col-md-3" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="four" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(4)}
             </div>
           </div>
@@ -253,13 +275,11 @@ class Task extends Component {
           )
         }
         &nbsp;
-        <button onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
-          { this.props.task.done ? "Mark as undone" : "Mark as done" }
-        </button>
+        <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
+          { this.props.task.done ? <i class="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
+        </span>
         &nbsp;
-        <button onClick = {this.props.removing} >
-          Delete
-        </button>
+        <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
         <br/>
         <br/>
       </div>
