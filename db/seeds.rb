@@ -15,22 +15,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-puts "delete table Categories"
-Category.destroy_all
 
 puts "delete table Tasks"
 Task.destroy_all
 
+puts "delete table User"
+User.destroy_all
 
-puts "Create some Categories (urgent, pas urgent)"
-urgent = Category.create!(
-  name: "Urgent"
+puts "Create User"
+alex = User.create!(
+  email: 'alex@test.com',
+  password: 'aaaaaa'
 )
-important = Category.create!(
-  name: "Important"
-)
-attente = Category.create!(
-  name: "En attente"
+
+papa = User.create!(
+  email: 'papa@test.com',
+  password: 'aaaaaa'
 )
 
 puts "Create some Tasks (email / password)"
@@ -38,17 +38,23 @@ Task.create!(
   name: "My first task",
   ending_date: Date.today,
   done: false,
-  category: urgent
+  category_id: 1,
+  user_id: alex.id
 )
 Task.create!(
   name: "My second task",
   ending_date: Date.today,
   done: false,
-  category: important
+  category_id: 2,
+  user_id: alex.id
 )
 
-User.create!(
-  email: 'alex@test.com',
-  password: 'aaaaaa'
+Task.create!(
+  name: "My third task",
+  ending_date: Date.today,
+  done: false,
+  category_id: 3,
+  user_id: papa.id
 )
+
 
