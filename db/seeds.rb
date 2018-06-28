@@ -15,12 +15,32 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+puts "delete table Categories"
+Category.destroy_all
+
+puts "delete table User"
+User.destroy_all
 
 puts "delete table Tasks"
 Task.destroy_all
 
-puts "delete table User"
-User.destroy_all
+puts "Create some Categories (urgent, pas urgent)"
+urgent_important = Category.create!(
+  id: 1,
+  name: "Urgent Important"
+)
+pas_urgent_important = Category.create!(
+  id: 2,
+  name: "pas Urgent Important"
+)
+urgent_pas_important = Category.create!(
+  id: 3,
+  name: "pas Important Urgent"
+)
+pas_urgent_pas_important = Category.create!(
+  id: 4,
+  name: "pas Urgent pas Important"
+)
 
 puts "Create User"
 alex = User.create!(
