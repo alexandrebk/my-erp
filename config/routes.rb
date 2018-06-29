@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :tasks, only: [ :index, :create, :destroy, :update, :edit]
+      get 'tasks/finish'
     end
   end
 
+  # get 'api/v1/tasks/finish' , defaults: { format: :json }
   resources :tasks, only: [ :index, :show ]
   root to: 'tasks#index'
 

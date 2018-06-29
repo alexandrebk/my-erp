@@ -11,6 +11,8 @@
 
       <!-- Links when logged in -->
       <%= link_to "Home", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Task done", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "Task show", root_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to "Task API", api_v1_tasks_path, class: "navbar-wagon-item navbar-wagon-link" %>
 
       <!-- Avatar with dropdown menu -->
@@ -50,6 +52,11 @@
         <li>
           <%= link_to root_path do %>
             <i class="fa fa-home"></i> <%= t(".Home", default: "Home") %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to root_path do %>
+            <i class="fa fa-home"></i> <%= t(".Home", default: "Task Done") %>
           <% end %>
         </li>
         <li>

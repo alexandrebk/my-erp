@@ -7,6 +7,11 @@ class Api::V1::TasksController < ApplicationController
     render json: tasks # see Message.as_json method
   end
 
+  def finish
+    tasks = Task.where(user_id: current_user, done: true).order(created_at: :desc)
+    render json: tasks # see Message.as_json method
+  end
+
   def create
     puts params[:name]
     task = Task.new(name: params[:name], ending_date: params[:ending_date], done: params[:done], category_id: params[:category_id], user_id: current_user.id, created_at: Date.today, updated_at: Date.today)

@@ -287,9 +287,5 @@ class Task extends Component {
   }
 }
 
-// onDrop={(event) => this.onDrop(event, categorie1)}
-// On récupère la catégorie quand fait un onDrop et la rebascule qd on fait le map.
-// On peut rafacto les maps selon l'identification de task et on donne un bojet pour réassigner.
-// Ordonner les taches. Il faut sous divser les zones de drop en A chque fois qu'on render une tache n définit aussi une zone.
 
 ReactDOM.render(<App />, document.getElementById('root'));
