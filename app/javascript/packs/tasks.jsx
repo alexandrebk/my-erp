@@ -128,13 +128,14 @@ class App extends Component {
   }
 
   async onDrop(event, category){
-    // L'id est dans l'event
+    // On sélectionne la tache avec le nom. Quand celui-ci n'est pas unique ca fait buguer le schmilblik.
+    // Soit j'essaye de récupérer l'ID de la tache soit je donne un fake ID.
     console.log("Je suis dans onDrop");
     console.log(event.dataTransfer.getData("text/plain"));
     this.setState({
       myList : this.state.myList.map(
         function (element) {
-          if (element.id == event.dataTransfer.getData("text/plain")) {
+          if (element.name == event.dataTransfer.getData("text/plain")) {
             Object.assign(element,{category_id: category});
             const myrequest = fetch(document.URL + `api/v1/tasks/${element.id}`, {
               method: 'PATCH',
@@ -247,13 +248,10 @@ class Task extends Component {
     this.state = {};
   }
 
-// onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}
-
   render(){
     let monStyle = {width: "130px", display: "inline-block"};
-    console.log("je passe dans le render!!");
     return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)} >
+      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
         {this.props.task.done ?
           (
             <span>
