@@ -1,26 +1,23 @@
 // Specific CSS for your home-page
-#liste{
-  display: grid;
-}
 
 #one {
-  grid-column: 1;
+  background-color: green;
 }
 
 #two {
-  grid-column: 2;
+  background-color: blue;
 }
 
 #three {
-  grid-column: 3;
+  background-color: orange;
 }
 
 #four {
-  grid-column: 4;
+  background-color: red;
 }
 
 .line{
-  height: 50vh;
+  min-height: 50vh;
 }
 
 .tasks {

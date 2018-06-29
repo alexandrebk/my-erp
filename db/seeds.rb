@@ -14,6 +14,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "delete table Tasks"
+Task.destroy_all
 
 puts "delete table Categories"
 Category.destroy_all
@@ -21,8 +23,6 @@ Category.destroy_all
 puts "delete table User"
 User.destroy_all
 
-puts "delete table Tasks"
-Task.destroy_all
 
 puts "Create some Categories (urgent, pas urgent)"
 urgent_important = Category.create!(

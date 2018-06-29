@@ -129,7 +129,7 @@ class App extends Component {
 
   async onDrop(event, category){
     // L'id est dans l'event
-    console.log("==> debug");
+    console.log("Je suis dans onDrop");
     console.log(event.dataTransfer.getData("text/plain"));
     this.setState({
       myList : this.state.myList.map(
@@ -204,35 +204,34 @@ class App extends Component {
         <br/>
         <div id="container">
           <div className="row">
-            <div id="one" className="col-md-2" >
+            <div className="col-md-2" >
             </div>
-            <div id="one" className="col-xs-12 col-md-5" >
+            <div className="col-xs-12 col-md-5" >
               Urgent
             </div>
-            <div id="two" className="col-xs-12 col-md-5" >
+            <div className="col-xs-12 col-md-5" >
               Pas Urgent
             </div>
           </div>
-          <div className="row line">
-            <div id="one" className="col-md-2" >
+          <div className="row">
+            <div className="col-md-2" >
             Important
             </div>
-            <div id="one" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(1)}
             </div>
-            <div id="two" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(2)}
             </div>
           </div>
-          ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-          <div className="row line">
-            <div id="one" className="col-md-2" >
+          <div className="row">
+            <div className="col-md-2" >
             Pas important
             </div>
-            <div id="three" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(3)}
             </div>
-            <div id="four" className="col-xs-12 col-md-5" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+            <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(4)}
             </div>
           </div>
@@ -248,10 +247,13 @@ class Task extends Component {
     this.state = {};
   }
 
+// onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}
+
   render(){
-    let monStyle = {width: "130px", display: "inline-block"}
+    let monStyle = {width: "130px", display: "inline-block"};
+    console.log("je passe dans le render!!");
     return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)}>
+      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.id)} >
         {this.props.task.done ?
           (
             <span>
