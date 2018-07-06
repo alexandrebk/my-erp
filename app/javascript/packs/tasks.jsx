@@ -194,8 +194,8 @@ class App extends Component {
         <span>Category: </span>
         <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
           <option value="1">Urgent & Important</option>
-          <option value="2">Pas Urgent & Important</option>
-          <option value="3">Urgent & Pas Important</option>
+          <option value="2">Urgent & Pas Important</option>
+          <option value="3">Pas Urgent & Important</option>
           <option value="4">Pas Urgent & Pas Important</option>
         </select>
         <button onClick = {() => this.fillList()} >
@@ -208,15 +208,15 @@ class App extends Component {
             <div className="col-md-2" >
             </div>
             <div className="col-xs-12 col-md-5" >
-              Urgent
+              Important
             </div>
             <div className="col-xs-12 col-md-5" >
-              Pas Urgent
+              Pas Important
             </div>
           </div>
           <div className="row">
             <div className="col-md-2" >
-            Important
+            Urgent
             </div>
             <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(1)}
@@ -227,7 +227,7 @@ class App extends Component {
           </div>
           <div className="row">
             <div className="col-md-2" >
-            Pas important
+            Pas Urgent
             </div>
             <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
               {afficherCat(3)}
