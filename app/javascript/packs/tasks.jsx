@@ -174,7 +174,7 @@ class App extends Component {
                 />
               )
     return (
-      <div>
+      <div id="container">
         <br/>
         <input
           onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
@@ -203,38 +203,36 @@ class App extends Component {
         </button>
         <br/>
         <br/>
-        <div id="container">
-          <div className="row">
-            <div className="col-md-2" >
-            </div>
-            <div className="col-xs-12 col-md-5" >
-              Important
-            </div>
-            <div className="col-xs-12 col-md-5" >
-              Pas Important
-            </div>
+        <div className="row">
+          <div className="col-md-2" >
           </div>
-          <div className="row">
-            <div className="col-md-2" >
-            Urgent
-            </div>
-            <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(1)}
-            </div>
-            <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(2)}
-            </div>
+          <div className="col-xs-12 col-md-5" >
+            Important
           </div>
-          <div className="row">
-            <div className="col-md-2" >
-            Pas Urgent
-            </div>
-            <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(3)}
-            </div>
-            <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(4)}
-            </div>
+          <div className="col-xs-12 col-md-5" >
+            Pas Important
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-2" >
+          Urgent
+          </div>
+          <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(1)}
+          </div>
+          <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(2)}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-2" >
+          Pas Urgent
+          </div>
+          <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(3)}
+          </div>
+          <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(4)}
           </div>
         </div>
       </div>

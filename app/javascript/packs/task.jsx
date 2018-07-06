@@ -164,7 +164,7 @@ class App extends Component {
   render() {
     let afficherCat = (category) =>
           this.state.myList
-              .filter((element) => element.category_id === category)
+              .filter((element) => element.done === true)
               .map(
                 (element, i) => <Task
                   key        = {i}
@@ -175,34 +175,6 @@ class App extends Component {
               )
     return (
       <div>
-        <br/>
-        <input
-          onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
-          value    = {this.state.startingData.name}
-        />
-        &nbsp;
-        <input
-          type     = "date"
-          onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
-          value    = {this.state.startingData.ending_date}
-        />
-        &nbsp;
-        <input
-          value = {this.state.startingData.done}
-          type  = "hidden"
-        />
-        <span>Category: </span>
-        <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
-          <option value="1">Urgent & Important</option>
-          <option value="2">Pas Urgent & Important</option>
-          <option value="3">Urgent & Pas Important</option>
-          <option value="4">Pas Urgent & Pas Important</option>
-        </select>
-        <button onClick = {() => this.fillList()} >
-          Valider
-        </button>
-        <br/>
-        <br/>
         <div id="container">
           <div className="row">
             <div className="col-md-2" >

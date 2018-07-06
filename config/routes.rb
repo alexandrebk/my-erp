@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   # get 'api/v1/tasks/finish' , defaults: { format: :json }
+  get 'tasks/finish', to: 'tasks#finish'
   resources :tasks, only: [ :index, :show ]
   root to: 'tasks#index'
 

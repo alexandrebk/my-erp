@@ -4,5 +4,10 @@ class TasksController < ApplicationController
   end
 
   def show
+    @test = "test1"
+  end
+
+  def finish
+    @test = "test1"
   end
 end
