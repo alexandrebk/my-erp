@@ -164,7 +164,7 @@ class App extends Component {
   render() {
     let afficherCat = (category) =>
           this.state.myList
-              .filter((element) => element.category_id === category)
+              .filter((element) => element.category_id === category && element.done === false)
               .map(
                 (element, i) => <Task
                   key        = {i}
@@ -274,7 +274,7 @@ class Task extends Component {
         }
         &nbsp;
         <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
-          { this.props.task.done ? <i class="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
+          { this.props.task.done ? <i className="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
         </span>
         &nbsp;
         <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>

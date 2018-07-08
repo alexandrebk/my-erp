@@ -17,8 +17,10 @@ class App extends Component {
     }
   }
 
+  // attention on ne peut pas utiliser document.URL ici il faut prendre juste la racine de l'URL
+
   async readTask() {
-    const myrequest = await fetch(document.URL + 'api/v1/tasks', {
+    const myrequest = await fetch('http://localhost:3000/api/v1/tasks', {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -164,7 +166,7 @@ class App extends Component {
   render() {
     let afficherCat = (category) =>
           this.state.myList
-              .filter((element) => element.done === true)
+              .filter((element) => element.done === true && element.category_id === category)
               .map(
                 (element, i) => <Task
                   key        = {i}
@@ -248,7 +250,7 @@ class Task extends Component {
         }
         &nbsp;
         <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
-          { this.props.task.done ? <i class="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
+          { this.props.task.done ? <i className="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
         </span>
         &nbsp;
         <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
