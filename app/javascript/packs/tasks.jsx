@@ -171,36 +171,44 @@ class App extends Component {
                   task       = {element}
                   removing   = {() => this.deleteElementFromList(element)}
                   editing    = {(newElement) => this.editingElementFromList(element, newElement)}
+                  editingEnd = {(newElement) => this.editingElementFromList(element, newElement)}
                 />
               )
     return (
       <div id="container">
         <br/>
-        <input
-          onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
-          value    = {this.state.startingData.name}
-        />
-        &nbsp;
-        <input
-          type     = "date"
-          onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
-          value    = {this.state.startingData.ending_date}
-        />
-        &nbsp;
-        <input
-          value = {this.state.startingData.done}
-          type  = "hidden"
-        />
-        <span>Category: </span>
-        <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
-          <option value="1">Urgent & Important</option>
-          <option value="2">Urgent & Pas Important</option>
-          <option value="3">Pas Urgent & Important</option>
-          <option value="4">Pas Urgent & Pas Important</option>
-        </select>
-        <button onClick = {() => this.fillList()} >
-          Valider
-        </button>
+        <div className="row">
+          <div className="col-md-2" >
+          </div>
+          <div className="col-md-10" >
+            <input
+              onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
+              value    = {this.state.startingData.name}
+            />
+            &nbsp;
+            <input
+              type     = "date"
+              onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
+              value    = {this.state.startingData.ending_date}
+            />
+            &nbsp;
+            <input
+              value = {this.state.startingData.done}
+              type  = "hidden"
+            />
+            <span>Category:</span>
+            <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
+              <option value="1">Urgent & Important</option>
+              <option value="2">Urgent & Pas Important</option>
+              <option value="3">Pas Urgent & Important</option>
+              <option value="4">Pas Urgent & Pas Important</option>
+            </select>
+            &nbsp;
+            <button onClick = {() => this.fillList()}>
+              Add a new task
+            </button>
+          </div>
+        </div>
         <br/>
         <br/>
         <div className="row">
@@ -243,7 +251,7 @@ class App extends Component {
 class Task extends Component {
   constructor(props){
     super(props);
-    this.state = { edit: false};
+    this.state = { edit: false };
   }
 
   changeStateTask(element) {
@@ -253,7 +261,7 @@ class Task extends Component {
   }
 
   render(){
-    let monStyle = {width: "130px", display: "inline-block"};
+    let monStyle = {width: "200px", display: "inline-block", color: "black"};
     return (
       <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
         {this.state.edit ?
@@ -274,9 +282,9 @@ class Task extends Component {
           :
           (
             <span>
-              <span style={monStyle} > {this.props.task.name} </span>
+              <span style={monStyle}> {this.props.task.name} </span>
               &nbsp;
-              <span style={monStyle} > {this.props.task.ending_date} </span>
+              <span style={monStyle}> {this.props.task.ending_date} </span>
             </span>
           )
         }
