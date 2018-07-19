@@ -3,7 +3,7 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom';
 // import Task from './task';
 
-var width = window.innerWidth ;
+var width  = window.innerWidth ;
 var height = window.innerHeight ;
 
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
@@ -243,21 +243,21 @@ class App extends Component {
 class Task extends Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = { edit: false};
+  }
+
+  changeStateTask(element) {
+    this.setState({
+      edit: !this.state.edit
+    });
   }
 
   render(){
     let monStyle = {width: "130px", display: "inline-block"};
     return (
       <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
-        {this.props.task.done ?
+        {this.state.edit ?
           (
-            <span>
-              <span style={monStyle} > {this.props.task.name} </span>
-              &nbsp;
-              <span style={monStyle} > {this.props.task.ending_date} </span>
-            </span>
-          ) : (
             <span>
               <input
                 onChange = {(event) => this.props.editing({name: event.target.value})}
@@ -271,6 +271,14 @@ class Task extends Component {
               />
             </span>
           )
+          :
+          (
+            <span>
+              <span style={monStyle} > {this.props.task.name} </span>
+              &nbsp;
+              <span style={monStyle} > {this.props.task.ending_date} </span>
+            </span>
+          )
         }
         &nbsp;
         <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
@@ -278,12 +286,13 @@ class Task extends Component {
         </span>
         &nbsp;
         <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
+        &nbsp;
+        <i className="fas fa-edit" onClick = {(event) => this.changeStateTask(event)}> </i>
         <br/>
         <br/>
       </div>
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
