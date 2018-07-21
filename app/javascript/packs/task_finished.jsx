@@ -3,7 +3,7 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom';
 // import Task from './task';
 
-var width = window.innerWidth ;
+var width  = window.innerWidth ;
 var height = window.innerHeight ;
 
 let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
