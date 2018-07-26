@@ -261,41 +261,44 @@ class Task extends Component {
   }
 
   render(){
-    let monStyle = {width: "200px", display: "inline-block", color: "black"};
     return (
       <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
         {this.state.edit ?
           (
-            <span>
+            <div>
               <input
                 onChange = {(event) => this.props.editing({name: event.target.value})}
                 value = {this.props.task.name}
               />
-              &nbsp;
+            </div>
+          )
+          :
+          (
+            <div className="task__name"> {this.props.task.name} </div>
+          )
+        }
+        {this.state.edit ?
+          (
+            <div>
               <input
                 type = "date"
                 onChange = {(event) => this.props.editing({date: event.target.value})}
                 value = {this.props.task.ending_date}
               />
-            </span>
+            </div>
           )
           :
           (
-            <span>
-              <span style={monStyle}> {this.props.task.name} </span>
-              &nbsp;
-              <span style={monStyle}> {this.props.task.ending_date} </span>
-            </span>
+            <div> {this.props.task.ending_date} </div>
           )
         }
-        &nbsp;
-        <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
+        <div onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
           { this.props.task.done ? <i className="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
-        </span>
-        &nbsp;
-        <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
-        &nbsp;
-        <i className="fas fa-edit" onClick = {(event) => this.changeStateTask(event)}> </i>
+          &nbsp;
+          <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
+          &nbsp;
+          <i className="fas fa-edit" onClick = {(event) => this.changeStateTask(event)}> </i>
+        </div>
         <br/>
         <br/>
       </div>
