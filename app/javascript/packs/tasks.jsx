@@ -162,7 +162,7 @@ class App extends Component {
   }
 
   render() {
-    let afficherCat = (category) =>
+    let afficherCat = (category, color) =>
           this.state.myList
               .filter((element) => element.category_id === category && element.done === false)
               .map(
@@ -172,6 +172,7 @@ class App extends Component {
                   removing   = {() => this.deleteElementFromList(element)}
                   editing    = {(newElement) => this.editingElementFromList(element, newElement)}
                   editingEnd = {(newElement) => this.editingElementFromList(element, newElement)}
+                  category   = {category}
                 />
               )
     return (
@@ -225,10 +226,10 @@ class App extends Component {
           <div className="col-md-2" >
           Urgent
           </div>
-          <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(1)}
+          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(1, "green")}
           </div>
-          <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(2)}
           </div>
         </div>
@@ -236,10 +237,10 @@ class App extends Component {
           <div className="col-md-2" >
           Pas Urgent
           </div>
-          <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(3)}
           </div>
-          <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(4)}
           </div>
         </div>
@@ -261,8 +262,33 @@ class Task extends Component {
   }
 
   render(){
+    let monStyle = {width: "200px", display: "inline-block", color: "black"};
+    // let green  = { backgroundColor: "green"  };
+    // let blue   = { backgroundColor: "blue" } ;
+    // let orange = { backgroundColor: "orange" };
+    // let red    = { backgroundColor: "red" } ;
+    // console.log(this.props.category);
+    let color  = {}
+    // if (a > 0) {
+    //   return "positive";
+    // } else {
+    //   return "NOT positive";
+    // }
+    switch (this.props.category) {
+      case 1:
+        Object.assign(color, {backgroundColor: "green" });
+        break;
+      case 2:
+        Object.assign(color, {backgroundColor: "blue" });
+        break;
+      case 3:
+        Object.assign(color, {backgroundColor: "orange" });
+        break;
+      case 4:
+        Object.assign(color, {backgroundColor: "red" });
+    }
     return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
+      <div style={color} className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
         {this.state.edit ?
           (
             <div>
