@@ -162,7 +162,7 @@ class App extends Component {
   }
 
   render() {
-    let afficherCat = (category, color) =>
+    let afficherCat = (category) =>
           this.state.myList
               .filter((element) => element.category_id === category && element.done === false)
               .map(
@@ -225,10 +225,10 @@ class App extends Component {
           <div className="col-md-2 text-right" >
           Urgent
           </div>
-          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
-            {afficherCat(1, "green")}
+          <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+            {afficherCat(1)}
           </div>
-          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(2)}
           </div>
         </div>
@@ -236,10 +236,10 @@ class App extends Component {
           <div className="col-md-2 text-right" >
           Pas Urgent
           </div>
-          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(3)}
           </div>
-          <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
+          <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
             {afficherCat(4)}
           </div>
         </div>
