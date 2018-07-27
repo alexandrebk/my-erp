@@ -73,7 +73,7 @@ class App extends Component {
   }
 
   async deleteElementFromList(elementToRemove){
-    const myrequest = await fetch(document.URL + `api/v1/tasks/${elementToRemove.id}`, {
+    const myrequest = await fetch(document.origin + `api/v1/tasks/${elementToRemove.id}`, {
       method: 'DELETE',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
