@@ -50,8 +50,17 @@ body{
 }
 
 .task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 10px;
   border: 1px solid black;
   padding: 5px;
   width: 550px;
+  color: black;
+}
+
+.task__name{
+  flex-grow: 0.9;
+  text-align: left;
 }
