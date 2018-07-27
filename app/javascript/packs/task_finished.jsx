@@ -20,7 +20,7 @@ class App extends Component {
   // attention on ne peut pas utiliser document.URL ici il faut prendre juste la racine de l'URL
 
   async readTask() {
-    const myrequest = await fetch(document.URL + 'api/v1/tasks', {
+    const myrequest = await fetch(document.origin + 'api/v1/tasks', {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -67,7 +67,7 @@ class App extends Component {
   async fillList(){
     console.log(this.state.startingData);
     console.log("je fetch l'API avec une requete POST");
-    const myrequest = await fetch(document.URL + 'api/v1/tasks', {
+    const myrequest = await fetch(document.origin + 'api/v1/tasks', {
       method: 'POST',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   async deleteElementFromList(elementToRemove){
-    const myrequest = await fetch(document.URL + `api/v1/tasks/${elementToRemove.id}`, {
+    const myrequest = await fetch(document.origin + `api/v1/tasks/${elementToRemove.id}`, {
       method: 'DELETE',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -107,7 +107,7 @@ class App extends Component {
     Object.assign(elementToEdit,newElement);
     console.log(elementToEdit);
     console.log("je fetch l'API avec une requete PATCH");
-    const myrequest = await fetch(document.URL + `api/v1/tasks/${elementToEdit.id}`, {
+    const myrequest = await fetch(document.origin + `api/v1/tasks/${elementToEdit.id}`, {
       method: 'PATCH',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -139,7 +139,7 @@ class App extends Component {
         function (element) {
           if (element.name == event.dataTransfer.getData("text/plain")) {
             Object.assign(element,{category_id: category});
-            const myrequest = fetch(document.URL + `api/v1/tasks/${element.id}`, {
+            const myrequest = fetch(document.origin + `api/v1/tasks/${element.id}`, {
               method: 'PATCH',
               headers: {
                 'X-Requested-With': 'XMLHttpRequest',
