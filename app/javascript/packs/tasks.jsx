@@ -41,21 +41,6 @@ class App extends Component {
     });
   }
 
-  setStartingData(name, ending_date, done, category_id) {
-    this.setState({
-      startingData: {name, ending_date, done, category_id}
-    }, ()=>{
-      console.log(this.state.startingData)
-    });
-    // A refacto comme ci-dessous
-    // this.setState({
-    //   [option] : value
-    // }, ()=>{
-    //     console.log(this.state.startingData)
-    // });
-  }
-
-
   handleCategoryChange = (value, option) => {
     const newElement = { [option] : parseInt(value, 10) }
     Object.assign(this.state.startingData,newElement);

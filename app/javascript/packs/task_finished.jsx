@@ -164,9 +164,9 @@ class App extends Component {
   }
 
   render() {
-    let afficherCat = (category) =>
+    let afficherTask = (category) =>
           this.state.myList
-              .filter((element) => element.done === true && element.category_id === category)
+              .filter((element) => element.done === true)
               .map(
                 (element, i) => <Task
                   key        = {i}
@@ -180,34 +180,10 @@ class App extends Component {
         <div id="container">
           <div className="row">
             <div className="col-md-2" >
+             View Task#Finish
             </div>
-            <div className="col-xs-12 col-md-5" >
-              Urgent
-            </div>
-            <div className="col-xs-12 col-md-5" >
-              Pas Urgent
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-2" >
-            Important
-            </div>
-            <div id="one" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(1)}
-            </div>
-            <div id="two" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 2)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(2)}
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-2" >
-            Pas important
-            </div>
-            <div id="three" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(3)}
-            </div>
-            <div id="four" className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 4)} onDragOver={(event) => this.onDragOver(event)}>
-              {afficherCat(4)}
+            <div className="col-xs-12 col-md-10 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
+              {afficherTask(1)}
             </div>
           </div>
         </div>
@@ -219,41 +195,50 @@ class App extends Component {
 class Task extends Component {
   constructor(props){
     super(props);
-    this.state = {};
+    this.state = { edit: false };
   }
 
   render(){
     let monStyle = {width: "130px", display: "inline-block"};
+    let color    = {}
     return (
-      <div className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
-        {this.props.task.done ?
+      <div style={color} className="task text-center" draggable="true" onDragStart={(event) => event.dataTransfer.setData("text/plain", this.props.task.name)} >
+        {this.state.edit ?
           (
-            <span>
-              <span style={monStyle} > {this.props.task.name} </span>
-              &nbsp;
-              <span style={monStyle} > {this.props.task.ending_date} </span>
-            </span>
-          ) : (
-            <span>
+            <div>
               <input
                 onChange = {(event) => this.props.editing({name: event.target.value})}
                 value = {this.props.task.name}
               />
-              &nbsp;
+            </div>
+          )
+          :
+          (
+            <div className="task__name"> {this.props.task.name} </div>
+          )
+        }
+        {this.state.edit ?
+          (
+            <div>
               <input
                 type = "date"
                 onChange = {(event) => this.props.editing({date: event.target.value})}
                 value = {this.props.task.ending_date}
               />
-            </span>
+            </div>
+          )
+          :
+          (
+            <div> {this.props.task.ending_date} </div>
           )
         }
-        &nbsp;
-        <span onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
+        <div onClick = {(event) => this.props.editing({done: !this.props.task.done})} >
           { this.props.task.done ? <i className="fas fa-times-circle"></i> : <i className="fas fa-check-circle"></i> }
-        </span>
-        &nbsp;
-        <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
+          &nbsp;
+          <i className="fas fa-trash-alt" onClick = {this.props.removing}> </i>
+          &nbsp;
+          <i className="fas fa-edit" onClick = {(event) => this.changeStateTask(event)}> </i>
+        </div>
         <br/>
         <br/>
       </div>
