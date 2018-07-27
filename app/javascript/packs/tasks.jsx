@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 var width  = window.innerWidth ;
 var height = window.innerHeight ;
 
-let startingData = { name: "name", ending_date: "2018-05-01", done: false, category_id: 1};
+let startingData = { name: "New Task", ending_date: "2018-05-01", done: false, category_id: 1};
 
 class App extends Component {
   constructor(){ // initialize en Ruby, est déclenché quand on fait une création d'objet cad un new
@@ -181,7 +181,7 @@ class App extends Component {
         <div className="row">
           <div className="col-md-2" >
           </div>
-          <div className="col-md-10" >
+          <div className="col-md-10 task__new" >
             <input
               onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
               value    = {this.state.startingData.name}
@@ -197,7 +197,6 @@ class App extends Component {
               value = {this.state.startingData.done}
               type  = "hidden"
             />
-            <span>Category:</span>
             <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
               <option value="1">Urgent & Important</option>
               <option value="2">Urgent & Pas Important</option>
@@ -205,7 +204,7 @@ class App extends Component {
               <option value="4">Pas Urgent & Pas Important</option>
             </select>
             &nbsp;
-            <button onClick = {() => this.fillList()}>
+            <button className="btn btn-primary" onClick = {() => this.fillList()}>
               Add a new task
             </button>
           </div>
@@ -215,15 +214,15 @@ class App extends Component {
         <div className="row">
           <div className="col-md-2" >
           </div>
-          <div className="col-xs-12 col-md-5" >
+          <div className="col-xs-12 col-md-5 text-center" >
             Important
           </div>
-          <div className="col-xs-12 col-md-5" >
+          <div className="col-xs-12 col-md-5 text-center" >
             Pas Important
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2" >
+          <div className="col-md-2 text-right" >
           Urgent
           </div>
           <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 1)} onDragOver={(event) => this.onDragOver(event)}>
@@ -234,7 +233,7 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-2" >
+          <div className="col-md-2 text-right" >
           Pas Urgent
           </div>
           <div className="col-xs-12 col-md-5 line" onDrop={(event) => this.onDrop(event, 3)} onDragOver={(event) => this.onDragOver(event)}>

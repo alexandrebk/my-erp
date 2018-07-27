@@ -1,0 +1,29 @@
+.tasks {
+  border-radius: 10px;
+  border: 5px solid black;
+  grid-row: 1;
+  width: 25%;
+  padding: 50px;
+  width: 300px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 5px;
+  width: 550px;
+  color: black;
+}
+
+.task__new{
+  display: flex;
+  justify-content: space-around;
+}
+
+.task__name{
+  flex-grow: 0.9;
+  text-align: left;
+}
