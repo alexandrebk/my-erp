@@ -1,9 +1,13 @@
 class Api::V1::TasksController < ApplicationController
 
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: :index
+  TEST_USER = User.find_by(email: "test@test.com")
 
   def index
-    tasks = Task.where(user_id: current_user)
+    # on va dire soit le user est connecté dans ca cas la on  a current user sinon le user id est égale à 0
+    # tasks = Task.where(user_id: current_user)
+    tasks = current_user == nil ? Task.where(user_id: TEST_USER) : Task.where(user_id: current_user)
     render json: tasks # see Message.as_json method
   end
 

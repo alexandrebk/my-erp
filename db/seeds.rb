@@ -43,6 +43,12 @@ pas_urgent_pas_important = Category.create!(
 )
 
 puts "Create User"
+
+home = User.create!(
+  email: 'test@test.com',
+  password: 'aaaaaa'
+)
+
 alex = User.create!(
   email: 'alex@test.com',
   password: 'aaaaaa'
@@ -75,6 +81,35 @@ Task.create!(
   done: false,
   category_id: 3,
   user_id: papa.id
+)
+Task.create!(
+  name: "My first task",
+  ending_date: Date.today,
+  done: false,
+  category_id: 1,
+  user_id: home.id
+)
+Task.create!(
+  name: "My second task",
+  ending_date: Date.today,
+  done: false,
+  category_id: 2,
+  user_id: home.id
+)
+
+Task.create!(
+  name: "My third task",
+  ending_date: Date.today,
+  done: false,
+  category_id: 3,
+  user_id: home.id
+)
+Task.create!(
+  name: "My fourth task",
+  ending_date: Date.today,
+  done: false,
+  category_id: 4,
+  user_id: home.id
 )
 
 
