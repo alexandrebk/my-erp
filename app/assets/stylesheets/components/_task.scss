@@ -21,9 +21,15 @@
 .task__new{
   display: flex;
   justify-content: space-around;
+  height: 50px;
+  padding: 10px;
 }
 
 .task__name{
   flex-grow: 0.9;
   text-align: left;
+}
+
+.task__header{
+  height: 20px;
 }

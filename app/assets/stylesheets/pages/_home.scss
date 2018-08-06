@@ -3,6 +3,10 @@ body{
   font-family: Helvetica;
 }
 
+#container {
+  height: calc(100vh - 70px);
+}
+
 #one {
   background-color: rgba(0, 255, 0, 0.5);
 }
@@ -36,5 +40,5 @@ body{
 }
 
 .line{
-  min-height: 50vh;
+  height: calc(50vh - 70px);
 }

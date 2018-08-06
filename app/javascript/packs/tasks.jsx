@@ -162,7 +162,6 @@ class App extends Component {
               )
     return (
       <div id="container">
-        <br/>
         <div className="row">
           <div className="col-md-2" >
           </div>
@@ -194,9 +193,7 @@ class App extends Component {
             </button>
           </div>
         </div>
-        <br/>
-        <br/>
-        <div className="row">
+        <div className="row task__header">
           <div className="col-md-2" >
           </div>
           <div className="col-xs-12 col-md-5 text-center" >
