@@ -33,3 +33,11 @@
 .task__header{
   height: 20px;
 }
+
+@media(max-width: 720px) {
+  .task__new {
+    /* re-define your grid for mobile and tablet */
+    display: list-item;
+    height: 50px;
+  }
+}
