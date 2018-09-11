@@ -3,7 +3,7 @@
 <%= simple_form_for(@task) do |f| %>
   <%= f.input :name %>
   <%= f.input :ending_date %>
-  <%= f.input :category_id, as: :radio_buttons, collection: [['1', 'female'], ['2', 'male'], ['3', 'urgent'], ['4', 'important']], label_method: :second, value_method: :first %>
+  <%= f.input :category_id, as: :radio_buttons, radio_buttons_style: :inline, collection: [['1', 'female'], ['2', 'male'], ['3', 'urgent'], ['4', 'important']], label_method: :second, value_method: :first %>
   <%= f.submit "add a task", class: "btn btn-primary" %>
 <% end %>
 
