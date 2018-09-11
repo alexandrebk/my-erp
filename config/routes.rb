@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
   # get 'api/v1/tasks/finish' , defaults: { format: :json }
   get 'tasks/finish', to: 'tasks#finish'
-  resources :tasks, only: [ :index, :show ]
+  resources :tasks, only: [ :index, :show, :create ]
   root to: 'tasks#index'
+  # post "restaurants" => "restaurants#create"
 
 end

@@ -14,7 +14,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new
+    @task         = Task.new(task_params)
+    @task.user_id = current_user.id
+    @task.done    = false
     @task.save
     redirect_to root_path
   end
@@ -22,6 +24,6 @@ class TasksController < ApplicationController
 private
 
   def task_params
-    params.require(:article).permit(:name, :ending_date, :category_id)
+    params.require(:task).permit(:name, :ending_date, :category_id)
   end
 end
