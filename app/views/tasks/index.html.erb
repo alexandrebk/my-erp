@@ -1,12 +1,11 @@
-<p>Test de simple form</p>
-
-<%= simple_form_for @task , wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
-  <%= f.input :name, label: false, placeholder: 'Name Task' %>
-  <%= f.input :ending_date, label: false %>
-  <%= f.input :category_id, as: :radio_buttons, collection: [['1', 'urgent & important'], ['2', 'urgent & pas important'], ['3', 'pas urgent & important'], ['4', 'pas urgent & pas important']], label_method: :second, value_method: :first %>
-  <%= f.submit "Add a new task", class: "btn btn-primary" %>
-<% end %>
-
+<div class="container">
+  <%= simple_form_for @task , wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+    <%= f.input :name, label: false, placeholder: 'Name Task', input_html: {maxlength: 15, size: 15} %>
+    <%= f.input :ending_date, label: false %>
+    <%= f.input :category_id, legend_tag: false, as: :radio_buttons, collection: [['1', 'Urgent & Important'], ['2', 'Urgent & Pas important'], ['3', 'Pas urgent & Important'], ['4', 'Pas urgent & Pas important']], label_method: :second, value_method: :first %>
+    <%= f.submit "New task", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
 <div id="root"></div>
 
