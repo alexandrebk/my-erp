@@ -1,10 +1,10 @@
 <p>Test de simple form</p>
 
-<%= simple_form_for(@task) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :ending_date %>
-  <%= f.input :category_id, as: :radio_buttons, radio_buttons_style: :inline, collection: [['1', 'female'], ['2', 'male'], ['3', 'urgent'], ['4', 'important']], label_method: :second, value_method: :first %>
-  <%= f.submit "add a task", class: "btn btn-primary" %>
+<%= simple_form_for @task , wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+  <%= f.input :name, label: false, placeholder: 'Name Task' %>
+  <%= f.input :ending_date, label: false %>
+  <%= f.input :category_id, as: :radio_buttons, collection: [['1', 'urgent & important'], ['2', 'urgent & pas important'], ['3', 'pas urgent & important'], ['4', 'pas urgent & pas important']], label_method: :second, value_method: :first %>
+  <%= f.submit "Add a new task", class: "btn btn-primary" %>
 <% end %>
 
 
