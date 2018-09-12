@@ -8,6 +8,9 @@ class Api::V1::TasksController < ApplicationController
     # on va dire soit le user est connecté dans ca cas la on  a current user sinon le user id est égale à 0
     # tasks = Task.where(user_id: current_user)
     tasks = current_user == nil ? Task.where(user_id: TEST_USER) : Task.where(user_id: current_user)
+    puts "debug"
+
+    p tasks
     render json: tasks # see Message.as_json method
   end
 

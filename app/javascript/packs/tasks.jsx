@@ -160,39 +160,40 @@ class App extends Component {
                   category   = {category}
                 />
               )
+        // ancien formulaire d'ajout de Tache en Ajax pure
+        // <div className="row">
+        //   <div className="col-md-2" >
+        //   </div>
+        //   <div className="col-md-10 task__new" >
+        //     <input
+        //       onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
+        //       value    = {this.state.startingData.name}
+        //     />
+        //     &nbsp;
+        //     <input
+        //       type     = "date"
+        //       onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
+        //       value    = {this.state.startingData.ending_date}
+        //     />
+        //     &nbsp;
+        //     <input
+        //       value = {this.state.startingData.done}
+        //       type  = "hidden"
+        //     />
+        //     <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
+        //       <option value="1">Urgent & Important</option>
+        //       <option value="2">Urgent & Pas Important</option>
+        //       <option value="3">Pas Urgent & Important</option>
+        //       <option value="4">Pas Urgent & Pas Important</option>
+        //     </select>
+        //     &nbsp;
+        //     <button className="btn btn-primary" onClick = {() => this.fillList()}>
+        //       Add a new task
+        //     </button>
+        //   </div>
+        // </div>
     return (
       <div id="container">
-        <div className="row">
-          <div className="col-md-2" >
-          </div>
-          <div className="col-md-10 task__new" >
-            <input
-              onChange = {(event) => this.setStartingData(event.target.value, this.state.startingData.ending_date, this.state.startingData.done, this.state.startingData.category_id)}
-              value    = {this.state.startingData.name}
-            />
-            &nbsp;
-            <input
-              type     = "date"
-              onChange = {(event) => this.setStartingData(this.state.startingData.name, event.target.value, this.state.startingData.done, this.state.startingData.category_id)}
-              value    = {this.state.startingData.ending_date}
-            />
-            &nbsp;
-            <input
-              value = {this.state.startingData.done}
-              type  = "hidden"
-            />
-            <select onChange = {(event) => this.handleCategoryChange(event.target.value, 'category_id')}>
-              <option value="1">Urgent & Important</option>
-              <option value="2">Urgent & Pas Important</option>
-              <option value="3">Pas Urgent & Important</option>
-              <option value="4">Pas Urgent & Pas Important</option>
-            </select>
-            &nbsp;
-            <button className="btn btn-primary" onClick = {() => this.fillList()}>
-              Add a new task
-            </button>
-          </div>
-        </div>
         <div className="row task__header">
           <div className="col-md-2" >
           </div>
